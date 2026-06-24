@@ -4,6 +4,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emnapi/core": "^1.11.1",
+    "@emnapi/runtime": "^1.11.1",
     "smplr": "^1.0.0"
   },
   "devDependencies": {
