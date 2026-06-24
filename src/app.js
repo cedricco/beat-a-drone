@@ -5,7 +5,7 @@ import { AudioContext } from "standardized-audio-context";
 const context = new AudioContext();
 const storage = CacheStorage();
 
-const instru1 = Soundfont(context, { instrument: "bagpipe", storage });
+const instru1 = Soundfont(context, { instrument: "cello", storage });
 const instru2 = Soundfont(context, { instrument: "taiko_drum", storage });
 
 await instru1.ready
