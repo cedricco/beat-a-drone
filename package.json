@@ -6,7 +6,8 @@
   "dependencies": {
     "@emnapi/core": "^1.11.1",
     "@emnapi/runtime": "^1.11.1",
-    "smplr": "^1.0.0"
+    "smplr": "^1.0.0",
+    "standardized-audio-context": "^25.3.77"
   },
   "devDependencies": {
     "vite": "^8.1.0"
