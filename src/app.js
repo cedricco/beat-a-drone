@@ -10,8 +10,6 @@ const instru2 = Soundfont(context, { instrument: "taiko_drum", storage });
 
 const startBtn = document.querySelector("#startBtn")
 startBtn.addEventListener("click", (e) => {
-    await instru1.ready
-    await instru2.ready
     const seq = Sequencer(context, { bpm: 100, loop: true });
     seq.addTrack(instru1, [
     { note: "C4", at: "1:1", duration: "1m" },
