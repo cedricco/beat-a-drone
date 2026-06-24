@@ -4,7 +4,8 @@ import { AudioContext } from "standardized-audio-context";
 const context = new AudioContext();
 const storage = CacheStorage();
 
-const instru1 = SplendidGrandPiano(context, { storage });
+// const instru1 = SplendidGrandPiano(context, { storage });
+const instru1 = Soundfont(context, { instrument: "bagpipe", storage });
 const instru2 = Soundfont(context, { instrument: "taiko_drum", storage });
 
 const startBtn = document.querySelector("#startBtn")
