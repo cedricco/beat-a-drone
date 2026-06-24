@@ -6,12 +6,7 @@ const context = new AudioContext();
 const storage = CacheStorage();
 
 const instru1 = Soundfont(context, { instrument: "cello", storage });
-const instru2 = Soundfont(context, { instrument: "taiko_drum", storage });
-
-await instru1.ready
-await instru2.ready
-
-instru1.output.volume = 80 // Max 127
+// const instru2 = Soundfont(context, { instrument: "taiko_drum", storage });
 
 
 const seq = Sequencer(context, { bpm: 100, loop: true });
@@ -29,24 +24,24 @@ seq.addTrack(instru1, [
   { note: "C4", at: "4:1", duration: "1m" },
   { note: "E4", at: "4:1", duration: "1m" },
 ]);
-seq.addTrack(instru2, [
-  { note: "C4", at: "1:1", duration: "4n" },
-  { note: "C5", at: "1:2", duration: "4n" },
-  { note: "C5", at: "1:3", duration: "4n" },
-  { note: "C5", at: "1:4", duration: "4n" },
-  { note: "C4", at: "2:1", duration: "4n" },
-  { note: "C5", at: "2:2", duration: "4n" },
-  { note: "C5", at: "2:3", duration: "4n" },
-  { note: "C5", at: "2:4", duration: "4n" },
-  { note: "C4", at: "3:1", duration: "4n" },
-  { note: "C5", at: "3:2", duration: "4n" },
-  { note: "C5", at: "3:3", duration: "4n" },
-  { note: "C5", at: "3:4", duration: "4n" },
-  { note: "C4", at: "4:1", duration: "4n" },
-  { note: "C5", at: "4:2", duration: "4n" },
-  { note: "C5", at: "4:3", duration: "4n" },
-  { note: "C5", at: "4:4", duration: "4n" },
-]);
+// seq.addTrack(instru2, [
+//   { note: "C4", at: "1:1", duration: "4n" },
+//   { note: "C5", at: "1:2", duration: "4n" },
+//   { note: "C5", at: "1:3", duration: "4n" },
+//   { note: "C5", at: "1:4", duration: "4n" },
+//   { note: "C4", at: "2:1", duration: "4n" },
+//   { note: "C5", at: "2:2", duration: "4n" },
+//   { note: "C5", at: "2:3", duration: "4n" },
+//   { note: "C5", at: "2:4", duration: "4n" },
+//   { note: "C4", at: "3:1", duration: "4n" },
+//   { note: "C5", at: "3:2", duration: "4n" },
+//   { note: "C5", at: "3:3", duration: "4n" },
+//   { note: "C5", at: "3:4", duration: "4n" },
+//   { note: "C4", at: "4:1", duration: "4n" },
+//   { note: "C5", at: "4:2", duration: "4n" },
+//   { note: "C5", at: "4:3", duration: "4n" },
+//   { note: "C5", at: "4:4", duration: "4n" },
+// ]);
 
 const startBtn = document.querySelector("#startBtn")
 startBtn.addEventListener("click", (e) => {
