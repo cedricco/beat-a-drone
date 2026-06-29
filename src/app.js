@@ -30,6 +30,7 @@ const seq = Sequencer(context, { bpm: 110, loop: true, humanize: { timingMs: 12,
 
 
 const OCTAVE = 1
+const SING_DIFF_OCTAVES = true
 const NOTES = ["A", "B", "C", "D", "E", "F", "G"]
 const START_AT_NOTE = 2 // Commence en C
 
@@ -40,7 +41,7 @@ for (let i=0; i < 7; i++) {
         const index = i + j*2 + START_AT_NOTE
         const remainder = index % 7
         const modulo = Math.floor(index/7)
-        notes.push(`${NOTES[remainder]}${OCTAVE + modulo}`)
+        notes.push(`${NOTES[remainder]}${OCTAVE + modulo + (SING_DIFF_OCTAVES ? j: 0)}`)
     }
     CHORDS_BY_NB[`${i}`] = notes
 }
@@ -116,7 +117,7 @@ rects.push({
     isDragging: false
 });
 rects.push({
-    x: 100,
+    x: (WIDTH / 4) - 14,
     y: 50,
     width: 30,
     height: 30,
@@ -124,7 +125,7 @@ rects.push({
     isDragging: false
 });
 rects.push({
-    x: 120,
+    x: (WIDTH / 4)*1.5 - 14,
     y: 50,
     width: 30,
     height: 30,
@@ -132,7 +133,7 @@ rects.push({
     isDragging: false
 });
 rects.push({
-    x: 140,
+    x: (WIDTH / 4)*3 - 14,
     y: 50,
     width: 30,
     height: 30,
