@@ -10,7 +10,7 @@ const tabInstru1El = document.querySelector("#tabInstru1")
 
 // const instru1 = SplendidGrandPiano(context, { storage });
 const instru1 = Soundfont(context, { 
-    instrument: "violin", 
+    instrument: "choir_aahs", 
     storage,
     onLoadProgress: ({ loaded, total }) => {
         instru1loadingEl.innerHTML = `${loaded} / ${total} samples loaded`;
@@ -29,13 +29,13 @@ const instru2 = Soundfont(context,
 const seq = Sequencer(context, { bpm: 110, loop: true, humanize: { timingMs: 12, velocity: 8 }, });
 
 const CHORDS_BY_NB = {
-    1: ["C5", "E5", "G5"],
-    2: ["D5", "F5", "A6"],
-    3: ["E5", "G5", "B6"],
-    4: ["F5", "A6", "C6"],
-    5: ["G5", "B6", "D6"],
-    6: ["A6", "C6", "E6"],
-    7: ["B6", "D6", "F6"], 
+    1: ["C3", "E3", "G3"],
+    2: ["D3", "F3", "A4"],
+    3: ["E3", "G3", "B4"],
+    4: ["F3", "A4", "C4"],
+    5: ["G3", "B4", "D4"],
+    6: ["A4", "C4", "E4"],
+    7: ["B4", "D4", "F4"], 
 }
 
 
@@ -61,7 +61,7 @@ startBtn.addEventListener("click", (e) => {
         for (let j = 0; j < 4; j++) {
             beats.push(
                 // 480 is ticks per quarter note so multiply by 4 to get ticks for a full one
-                { note: "C4", at: Math.floor(((rects[j].x) / WIDTH) * 480 * 4) + (480 * 4) * i, duration: "4n" }
+                { note: "C4", at: Math.floor(((rects[j].x + 15) / WIDTH) * 480 * 4) + (480 * 4) * i, duration: "4n" }
             )
         }
     }
@@ -103,7 +103,7 @@ rects.push({
     y: 50,
     width: 30,
     height: 30,
-    fill: "#ff550d",
+    fill: "#fF350d",
     isDragging: false
 });
 rects.push({
@@ -119,7 +119,7 @@ rects.push({
     y: 50,
     width: 30,
     height: 30,
-    fill: "#0c64e8",
+    fill: "#0C44e8",
     isDragging: false
 });
 
@@ -165,39 +165,23 @@ function myDown(e) {
     e.preventDefault();
     e.stopPropagation();
 
+    // get the current mouse position
+    var mx = parseInt(e.clientX - offsetX);
+    var my = parseInt(e.clientY - offsetY);
+
     // if we're dragging anything...
     if (dragok) {
 
-        // tell the browser we're handling this mouse event
-        e.preventDefault();
-        e.stopPropagation();
-
-        // get the current mouse position
-        var mx = parseInt(e.clientX - offsetX);
-        var my = parseInt(e.clientY - offsetY);
-
-        // // calculate the distance the mouse has moved
-        // // since the last mousemove
-        // var dx = mx - startX;
-        // var dy = my - startY;
-
-        // move each rect that isDragging 
-        // by the distance the mouse has moved
-        // since the last mousemove
         for (var i = 0; i < rects.length; i++) {
             var r = rects[i];
             if (r.isDragging) {
-                r.x = mx;
-                r.y = my;
+                r.x = mx - 15;
+                r.y = my - 15;
             }
         }
 
         // redraw the scene with the new rect positions
         draw();
-
-        // // reset the starting mouse position for the next mousemove
-        // startX = mx;
-        // startY = my;
 
         // clear all the dragging flags
         dragok = false;
@@ -206,9 +190,6 @@ function myDown(e) {
         }
 
     } else {
-        // get the current mouse position
-        var mx = parseInt(e.clientX - offsetX);
-        var my = parseInt(e.clientY - offsetY);
 
         // test each rect to see if mouse is inside
         dragok = false;
@@ -220,9 +201,7 @@ function myDown(e) {
                 r.isDragging = true;
             }
         }
-        // // save the current mouse position
-        // startX = mx;
-        // startY = my;
+
     }
 }
 
