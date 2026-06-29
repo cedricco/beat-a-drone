@@ -10,7 +10,7 @@ const tabInstru1El = document.querySelector("#tabInstru1")
 
 // const instru1 = SplendidGrandPiano(context, { storage });
 const instru1 = Soundfont(context, { 
-    instrument: "brass_section", 
+    instrument: "marimba", 
     storage,
     onLoadProgress: ({ loaded, total }) => {
         instru1loadingEl.innerHTML = `${loaded} / ${total} samples loaded`;
@@ -27,29 +27,6 @@ const instru2 = Soundfont(context,
 );
 
 const seq = Sequencer(context, { bpm: 110, loop: true, humanize: { timingMs: 12, velocity: 8 }, });
-seq.addTrack(instru2, [
-        { note: "C4", at: "1:1", duration: "4n" },
-        { note: "C5", at: "1:2", duration: "4n" },
-        { note: "C5", at: "1:2:360", duration: "4n" },
-        { note: "C5", at: "1:3", duration: "4n" },
-        { note: "C5", at: "1:3:240", duration: "4n" },
-        { note: "C5", at: "1:4", duration: "4n" },
-        { note: "C4", at: "2:1", duration: "4n" },
-        { note: "C5", at: "2:2", duration: "4n" },
-        { note: "C5", at: "2:3", duration: "4n" },
-        { note: "C5", at: "2:4", duration: "4n" },
-        { note: "C4", at: "3:1", duration: "4n" },
-        { note: "C5", at: "3:2:360", duration: "4n" },
-        { note: "C5", at: "3:3", duration: "4n" },
-        { note: "C5", at: "3:3:240", duration: "4n" },
-        { note: "C5", at: "3:4", duration: "4n" },
-        { note: "C4", at: "4:1", duration: "4n" },
-        { note: "C5", at: "4:2", duration: "4n" },
-        { note: "C5", at: "4:3", duration: "4n" },
-        { note: "C5", at: "4:4", duration: "4n" },
-    ],
-    { id: "instru2", volume: 1 },
-);
 
 const CHORDS_BY_NB = {
     1: ["C5", "E5", "G5"],
@@ -78,6 +55,18 @@ startBtn.addEventListener("click", (e) => {
         })
     });
     seq.addTrack(instru1, notes, { id: "instru1", volume: 0.6 })
+    seq.removeTrack(instru2)
+    const beats = Array()
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            beats.push(
+                // 480 is ticks per quarter note so multiply by 4 to get ticks for a full one
+                { note: "C4", at: Math.floor(((rects[j].x) / WIDTH) * 480 * 4) + (480 * 4) * i, duration: "4n" }
+            )
+        }
+    }
+    seq.addTrack(instru2, beats, { id: "instru2", volume: 1 },
+    );
     seq.start();
 })
 const stopBtn = document.querySelector("#stopBtn")
@@ -100,7 +89,7 @@ var startX;
 var startY;
 
 // an array of objects that define different rectangles
-var rects = [];
+let rects = [];
 rects.push({
     x: 75 - 15,
     y: 50 - 15,
