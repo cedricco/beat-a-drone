@@ -29,15 +29,15 @@ const instru2 = Soundfont(context,
 const seq = Sequencer(context, { bpm: 110, loop: true, humanize: { timingMs: 12, velocity: 8 }, });
 
 
-const OCTAVE = 1
+const OCTAVE = 0
 const SING_DIFF_OCTAVES = true
 const NOTES = ["A", "B", "C", "D", "E", "F", "G"]
-const START_AT_NOTE = 2 // Commence en C
+const START_AT_NOTE = 0 // 2 == Commence en C
 
 let CHORDS_BY_NB = {}
 for (let i=0; i < 7; i++) {
     const notes = Array()
-    for (let j=0; j < 3; j++) {
+    for (let j=0; j < 5; j++) {
         const index = i + j*2 + START_AT_NOTE
         const remainder = index % 7
         const modulo = Math.floor(index/7)
@@ -45,16 +45,6 @@ for (let i=0; i < 7; i++) {
     }
     CHORDS_BY_NB[`${i}`] = notes
 }
-console.log(CHORDS_BY_NB)
-
-// 1: ["C3", "E3", "G3"],
-//     2: ["D3", "F3", "A4"],
-//     3: ["E3", "G3", "B4"],
-//     4: ["F3", "A4", "C4"],
-//     5: ["G3", "B4", "D4"],
-//     6: ["A4", "C4", "E4"],
-//     7: ["B4", "D4", "F4"], 
-// }
 
 
 const startBtn = document.querySelector("#startBtn")
@@ -76,7 +66,7 @@ startBtn.addEventListener("click", (e) => {
     seq.removeTrack(instru2)
     const beats = Array()
     for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
+        for (let j = 0; j < rects.length; j++) {
             beats.push(
                 // 480 is ticks per quarter note so multiply by 4 to get ticks for a full one
                 { note: "C4", at: Math.floor(((rects[j].x + 15) / WIDTH) * 480 * 4) + (480 * 4) * i, duration: "4n" }
@@ -133,7 +123,23 @@ rects.push({
     isDragging: false
 });
 rects.push({
+    x: (WIDTH / 4)*2.5 - 14,
+    y: 50,
+    width: 30,
+    height: 30,
+    fill: "#0C44e8",
+    isDragging: false
+});
+rects.push({
     x: (WIDTH / 4)*3 - 14,
+    y: 50,
+    width: 30,
+    height: 30,
+    fill: "#0C44e8",
+    isDragging: false
+});
+rects.push({
+    x: (WIDTH / 4)*3.5 - 14,
     y: 50,
     width: 30,
     height: 30,
