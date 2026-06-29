@@ -5,9 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Beat a drone</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="src/styles.css">
     <script type="module" src="src/app.js"></script>
 </head>
-<body>Hey, <button id="startBtn">it makes sound</button> !
+<body>
+    <div>Hey, <button id="startBtn">it makes sound</button> !</div>
+    <div>OK, <button id="stopBtn">stop it</button></div>
+    <input id="tabInstru1" type="textarea">
+    <div>
+        Instru 1 chargement: <span id="instru1loading">En cours</span>
+    </div>
+    <div>
+        Instru 2 chargement: <span id="instru2loading">En cours</span>
+    </div>
+    <h4>Drag 1 or more shapes.</h4>
+    <canvas id="canvas" width=300 height=300></canvas>
 </body>
 </html>
