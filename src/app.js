@@ -28,15 +28,32 @@ const instru2 = Soundfont(context,
 
 const seq = Sequencer(context, { bpm: 110, loop: true, humanize: { timingMs: 12, velocity: 8 }, });
 
-const CHORDS_BY_NB = {
-    1: ["C3", "E3", "G3"],
-    2: ["D3", "F3", "A4"],
-    3: ["E3", "G3", "B4"],
-    4: ["F3", "A4", "C4"],
-    5: ["G3", "B4", "D4"],
-    6: ["A4", "C4", "E4"],
-    7: ["B4", "D4", "F4"], 
+
+const OCTAVE = 1
+const NOTES = ["A", "B", "C", "D", "E", "F", "G"]
+const START_AT_NOTE = 2 // Commence en C
+
+let CHORDS_BY_NB = {}
+for (let i=0; i < 7; i++) {
+    const notes = Array()
+    for (let j=0; j < 3; j++) {
+        const index = i + j*2 + START_AT_NOTE
+        const remainder = index % 7
+        const modulo = Math.floor(index/7)
+        notes.push(`${NOTES[remainder]}${OCTAVE + modulo}`)
+    }
+    CHORDS_BY_NB[`${i}`] = notes
 }
+console.log(CHORDS_BY_NB)
+
+// 1: ["C3", "E3", "G3"],
+//     2: ["D3", "F3", "A4"],
+//     3: ["E3", "G3", "B4"],
+//     4: ["F3", "A4", "C4"],
+//     5: ["G3", "B4", "D4"],
+//     6: ["A4", "C4", "E4"],
+//     7: ["B4", "D4", "F4"], 
+// }
 
 
 const startBtn = document.querySelector("#startBtn")
@@ -91,7 +108,7 @@ var startY;
 // an array of objects that define different rectangles
 let rects = [];
 rects.push({
-    x: 80,
+    x: -14,
     y: 50,
     width: 30,
     height: 30,
